@@ -14,22 +14,32 @@ const main = async () => {
 
     await page.keyboard.press('Enter'); 
     //login to cusis alr
+
+    await page.screenshot({path: 'shp-c.png'});
     
     await page.waitForTimeout(3000);
 
     await page.click('[id="DERIVED_REGFRM1_SSR_SELECT$0"]');
-    await page.click('[id="DERIVED_REGFRM1_SSR_SELECT$2"]');
-    await page.click('[id="DERIVED_REGFRM1_SSR_SELECT$4"]');
+    //await page.click('[id="DERIVED_REGFRM1_SSR_SELECT$2"]');
+    //await page.click('[id="DERIVED_REGFRM1_SSR_SELECT$4"]');
 
-    await page.evaluate(() => {
+
+    const t = Date.parse('17 Aug 2022 4:27:00 GMT') - Date.now();
+
+    await page.waitForTimeout(t);
+
+    await page.evaluate (() => {
         Array.from(document.querySelectorAll('a')).filter(li => {
-            return li.innerText == 'Validate'
+            return li.innerText == 'Enroll'
         }).forEach(ele => {
-            if(ele) ele.click();
+           ele.click();
+
         })
     });
 
-    await page.waitForTimeout(3000);
+    console.log(new Date(Date.now()));
+
+    await page.waitForTimeout(10000);
 
     await page.setViewport({width: 900, height: 1000});
 
